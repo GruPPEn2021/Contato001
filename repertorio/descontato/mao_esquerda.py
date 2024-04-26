@@ -61,11 +61,11 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
 
-    if(120 >= gyro >= 30):
+    if(120 >= gyro >= 40):
         note = ('a',mapNotas["D4"])
-    elif(31 >= gyro >= -29):
+    elif(39 >= gyro >= -39):
         note = ('a',mapNotas["F4"])
-    elif(-30 >= gyro >= -120):
+    elif(-40 >= gyro >= -120):
         note = ('a',mapNotas["F#4"])
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
@@ -92,11 +92,11 @@ while(1):
                 pass
 
     
-    if(10000 >= accel >= 8500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(18000 >= accel >= 15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["D4"],100]) 
 
-    elif(-8500 >= accel >= -10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-15000 >= accel >= -18000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["D4"],100])
     

@@ -7,7 +7,7 @@ import rtmidi
 import sys
 import json
 
-contato = 'COM2'
+contato = 'COM4'
 if len(sys.argv) > 1:
     contato = 'COM' + sys.argv[1]
 
