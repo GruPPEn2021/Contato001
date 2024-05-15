@@ -27,15 +27,17 @@ touch = 0
 #Variaveis 
 note = ('a',0)
 last_note = 0
-notes = [60,62,64,65]
+notes = [57,62,64,65]
 notes_delay = [0] * len(notes)
-lastDebounceTime = 0.1  
-debounceDelay = 0.1
-noteHold = 0.2
-soundEffectDuration = 2
-previousSoundEffect = 3
-soundeEffectInterval = 2
+lastDebounceTime = 0.1 
+noteHold = 0.1
+soundEffectDuration = 1
+previousSoundEffect = 1 
+soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
+
+
+print(notes_delay)
 
 def assignTimes(note):
     
@@ -48,14 +50,13 @@ while(1):
     if(serialPort.in_waiting > 0):
         serialString = serialPort.readline()
         sensorData = (serialString.decode('utf-8')).split('/')
- 
+        
         #print(serialString) 
         id = float(sensorData[0])
         gyro = float(sensorData[1]) * -1
         accel = float(sensorData[2])
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
-
 
     if(102 >= gyro >= 52):
         note = ('a',mapNotas["A4"])

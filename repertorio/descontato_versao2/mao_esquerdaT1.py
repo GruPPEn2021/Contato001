@@ -34,7 +34,7 @@ lastDebounceTime = 0.1
 noteHold = 0.2
 soundEffectDuration = 0.2
 previousSoundEffect = 1
-soundeEffectInterval = 1
+soundeEffectInterval = 0.2
 previousSoundEffectActiv = 0.1
 
 print(notes_delay)
@@ -53,21 +53,21 @@ while(1):
  
         #print(serialString) 
         id = float(sensorData[0])
-        gyro = float(sensorData[1]) * -1
+        gyro = float(sensorData[1])
         accel = float(sensorData[2])
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
 
-    if(130 >= gyro >= 72):
+    if(102 >= gyro >= 62):
         note = ('a',mapNotas["A#7"])
-    elif(71 >= gyro >= 31):
+    elif(61 >= gyro >= 21):
         note = ('a',mapNotas["A7"])
-    elif(30 >= gyro >= -30):
+    elif(20 >= gyro >= -20):
         note = ('a',mapNotas["F7"])
-    elif(-31 >= gyro >= -71):
+    elif(-21 >= gyro >= -61):
         note = ('a',mapNotas["D#7"])
-    elif(-72 >= gyro >= -130):
+    elif(-62 >= gyro >= -102):
         note = ('a',mapNotas["D7"])
  
 
@@ -94,14 +94,14 @@ while(1):
                 midiout.send_message([0x80,note[1],100])
                 pass
     
-    if(18000 >= accel >= 15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(10000 >= accel >= 8500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["D7"],100]) 
+        midiout.send_message([0x91,mapNotas["D4"],100]) 
 
-    elif(-15000 >= accel >= -18000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-8500 >= accel >= -10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["D7"],100])
+        midiout.send_message([0x91,mapNotas["D4"],100])
     
     if(time.time() - previousSoundEffectActiv >= soundeEffectInterval):
         previousSoundEffect = time.time()
-        midiout.send_message([0x81,mapNotas["D7"],100])
+        midiout.send_message([0x81,mapNotas["D4"],100])

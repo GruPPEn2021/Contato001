@@ -29,7 +29,7 @@ touch = 0
 #Variaveis 
 note = ('a',0)
 last_note = 0
-notes = [50,52,53,55,57]
+notes = [62,64,65,67,69] 
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1 
 noteHold = 0.2
@@ -60,15 +60,15 @@ while(1):
  
     
     if(102 >= gyro >= 62):
-        note = ('a',mapNotas["A4"])
+        note = ('a',mapNotas["D5"])
     elif(61 >= gyro >= 21):
-        note = ('a',mapNotas["G4"])
+        note = ('a',mapNotas["E5"])
     elif(20 >= gyro >= -20):
-        note = ('a',mapNotas["F4"])
+        note = ('a',mapNotas["F5"])
     elif(-21 >= gyro >= -61):
-        note = ('a',mapNotas["E4"])
+        note = ('a',mapNotas["G5"])
     elif(-62 >= gyro >= -102):
-        note = ('a',mapNotas["D4"])
+        note = ('a',mapNotas["A5"])
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  

@@ -27,14 +27,16 @@ touch = 0
 #Variáveis 
 note = ('a',0)
 last_note = 0
-notes = [30,51,57,60,66]
+notes = [62,63,65,69,70]
 notes_delay = [0] * len(notes)
-lastDebounceTime = 0.1  
-noteHold = 0.005
-soundEffectDuration = 2
-previousSoundEffect = 3
-soundeEffectInterval = 2
+lastDebounceTime = 0.1 
+noteHold = 0.2
+soundEffectDuration = 0.2
+previousSoundEffect = 1
+soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
+
+print(notes_delay)
 
 def assignTimes(note):
     
@@ -47,13 +49,14 @@ while(1):
     if(serialPort.in_waiting > 0):
         serialString = serialPort.readline()
         sensorData = (serialString.decode('utf-8')).split('/')
-  
+        
+        #print(serialString) 
         id = float(sensorData[0])
         gyro = float(sensorData[1]) * -1
         accel = float(sensorData[2])
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
-    
+
     if(180 >= gyro >= 137):
         note = ('a',mapNotas["A4"])
     elif(136 >= gyro >= 91):
@@ -99,7 +102,7 @@ while(1):
                 pass
 
     
-    if(7000 >= accel >= 14000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(14000 >= accel >= 7000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["F#2"],50])
     

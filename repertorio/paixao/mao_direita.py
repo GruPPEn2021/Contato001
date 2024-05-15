@@ -87,3 +87,15 @@ while(1):
             elif(touch !=1):
                 midiout.send_message([0x80,note[1],50])
                 pass
+    
+    if(10000 >= accel >= 8000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+        previousSoundEffectActiv = time.time()
+        midiout.send_message([0x91,mapNotas["A4"],100]) 
+
+    elif(-8000 >= accel >= -10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+        previousSoundEffectActiv = time.time()
+        midiout.send_message([0x91,mapNotas["A4"],100])
+    
+    if(time.time() - previousSoundEffectActiv >= soundeEffectInterval):
+        previousSoundEffect = time.time()
+        midiout.send_message([0x81,mapNotas["A4"],100])
