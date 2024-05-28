@@ -1,5 +1,4 @@
 
-
 import serial
 import time
 import rtmidi
@@ -15,25 +14,25 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(3)
+port = midiout.open_port(1)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
 
 
-#Variaveis do sensor
+#Variáveis do sensor
 gyro = 0
 accel = 0
 touch = 0
 
-#Variaveis 
+#Variáveis 
 note = ('a',0)
 last_note = 0
-notes = [63,65,67,68]
+notes = [60,64,65,69]
 notes_delay = [0] * len(notes)
-lastDebounceTime = 0.1 
-noteHold = 0.2
-soundEffectDuration = 0.2
+lastDebounceTime = 1
+noteHold = 1
+soundEffectDuration = 0.1
 previousSoundEffect = 1
 soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
@@ -60,48 +59,58 @@ while(1):
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
+    if(180 >= gyro >= 137):
+        note = ('a',mapNotas["A5"])
+    elif(136 >= gyro >= 91):
+        note = ('a',mapNotas["E5"])
 
-    if(120 >= gyro >= 57):
-        note = ('a',mapNotas["G#5"])
-    elif(56 >= gyro >= 1):
-        note = ('a',mapNotas["G5"])
-    elif(0 >= gyro >= -55):
+    elif(90 >= gyro >= 45):
         note = ('a',mapNotas["F5"])
-    elif(-56 >= gyro >= -119):
-        note = ('a',mapNotas["D#5"])
+    elif(44 >= gyro >= 0):
+        note = ('a',mapNotas["C5"])
+    elif(-1 >= gyro >= -45):
+        note = ('a',mapNotas["A5"])
+    elif(-46 >= gyro >= -90):
+        note = ('a',mapNotas["E5"])
 
-    can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
+    elif(-91 >= gyro >= -136):
+        note = ('a',mapNotas["F5"])
+    elif(-137 >= gyro >= -180):
+        note = ('a',mapNotas["C5"])
 
+
+    can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
+    
     if(touch == 1):
         lastDebounceTime = time.time()
         if(note != last_note):
             assignTimes(note[1])
             last_note = note
-            midiout.send_message([0x90,note[1],50])
+            midiout.send_message([0x90,note[1],100])
         else:
             if(can == True):
                 last_note = note
                 assignTimes(note[1])
-                midiout.send_message([0x90,note[1],50])
+                midiout.send_message([0x90,note[1],100])
     
     for i in range(len(notes)):
         if((time.time() - notes_delay[i] > noteHold)):
             if(notes[i] != note[1]):
-                midiout.send_message([0x80,notes[i],50])
+                midiout.send_message([0x80,notes[i],100])
                 pass
             elif(touch !=1):
-                midiout.send_message([0x80,note[1],50])
+                midiout.send_message([0x80,note[1],100]) 
                 pass
 
-    
-    if(15000 >= accel >= 10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
-        previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["A#5"],100]) 
 
-    elif(-9000 >= accel >= -15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(14000 >= accel >= 7000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["A#5"],100])
+        midiout.send_message([0x91,mapNotas["F#2"],100])
     
-    if(time.time() - previousSoundEffectActiv >= soundeEffectInterval):
+    elif(-7000 >= accel >= -14000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+        previousSoundEffectActiv = time.time()
+        midiout.send_message([0x91,mapNotas["F#2"],100]) 
+    
+    if(time.time() - previousSoundEffectActiv >= soundEffectDuration):
         previousSoundEffect = time.time()
-        midiout.send_message([0x81,mapNotas["A#5"],100])
+        midiout.send_message([0x81,mapNotas["F#2"],100])
