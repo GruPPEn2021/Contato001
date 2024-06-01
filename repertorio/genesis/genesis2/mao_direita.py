@@ -14,7 +14,7 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(2)
+port = midiout.open_port(4)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
@@ -27,7 +27,7 @@ touch = 0
 #Variaveis 
 note = ('a',0)
 last_note = 0
-notes = [79,81,83,86]
+notes = [60,62,64,65,67,69,71] 
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1  
 noteHold = 0.2
@@ -55,14 +55,20 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
 
-    if(102 >= gyro >= 52):
-        note = ('a',mapNotas["D7"])
-    elif(51 >= gyro >= 1):
-        note = ('a',mapNotas["B6"])
-    elif(0 >= gyro >= -50):
-        note = ('a',mapNotas["A6"])
-    elif(-51 >= gyro >= -101):
-        note = ('a',mapNotas["G6"])
+    if(101 >= gyro >= 76):
+        note = ('a',mapNotas["B5"])
+    elif(75 >= gyro >= 50):
+        note = ('a',mapNotas["A5"])
+    elif(49 >= gyro >= 24):
+        note = ('a',mapNotas["G5"])
+    elif(-1 >= gyro >= -26):
+        note = ('a',mapNotas["F5"])
+    elif(-27 >= gyro >= -52):
+        note = ('a',mapNotas["E5"])
+    elif(-53 >= gyro >= -78):
+        note = ('a',mapNotas["D5"])
+    elif(-79 >= gyro >= -104):
+        note = ('a',mapNotas["C5"])
   
     
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
@@ -82,10 +88,10 @@ while(1):
     for i in range(len(notes)):
         if((time.time() - notes_delay[i] > noteHold)):
             if(notes[i] != note[1]):
-                midiout.send_message([0x80,notes[i],50])
+                #midiout.send_message([0x80,notes[i],50])
                 pass
             elif(touch !=1):
-                midiout.send_message([0x80,note[1],50])
+                #midiout.send_message([0x80,note[1],50])
                 pass
     
     if(10000 >= accel >= 8000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
