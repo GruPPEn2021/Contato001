@@ -56,19 +56,19 @@ while(1):
 
 
     if(180 >= gyro >= 126):
-        note = ('a',mapNotas["B5"])
-    elif(125 >= gyro >= 75):
-        note = ('a',mapNotas["A5"])
-    elif(74 >= gyro >= 24):
-        note = ('a',mapNotas["G5"])
-    elif(23 >= gyro >= -27):
-        note = ('a',mapNotas["F5"])
-    elif(-28 >= gyro >= -78):
-        note = ('a',mapNotas["E5"])
-    elif(-79 >= gyro >= -129):
-        note = ('a',mapNotas["D5"])
-    elif(-130 >= gyro >= -180):
         note = ('a',mapNotas["C5"])
+    elif(125 >= gyro >= 75):
+        note = ('a',mapNotas["B5"])
+    elif(74 >= gyro >= 24):
+        note = ('a',mapNotas["A5"])
+    elif(23 >= gyro >= -27):
+        note = ('a',mapNotas["G5"])
+    elif(-28 >= gyro >= -78):
+        note = ('a',mapNotas["F5"])
+    elif(-79 >= gyro >= -129):
+        note = ('a',mapNotas["E5"])
+    elif(-130 >= gyro >= -180):
+        note = ('a',mapNotas["D5"])
   
     
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
