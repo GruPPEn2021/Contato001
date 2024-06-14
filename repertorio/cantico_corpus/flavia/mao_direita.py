@@ -15,7 +15,7 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(3)
+port = midiout.open_port(6)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
@@ -60,15 +60,15 @@ while(1):
  
     
     if(102 >= gyro >= 62):
-        note = ('a',mapNotas["D5"])
+        note = ('a',mapNotas["A5"])
     elif(61 >= gyro >= 21):
-        note = ('a',mapNotas["E5"])
+        note = ('a',mapNotas["G5"])
     elif(20 >= gyro >= -20):
         note = ('a',mapNotas["F5"])
     elif(-21 >= gyro >= -61):
-        note = ('a',mapNotas["G5"])
+        note = ('a',mapNotas["E5"])
     elif(-62 >= gyro >= -102):
-        note = ('a',mapNotas["A5"])
+        note = ('a',mapNotas["D5"])
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
