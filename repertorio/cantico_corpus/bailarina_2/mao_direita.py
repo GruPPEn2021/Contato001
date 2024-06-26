@@ -6,7 +6,7 @@ import rtmidi
 import sys
 import json
 
-contato = 'COM2'
+contato = 'COM1'
 if len(sys.argv) > 1:
     contato = 'COM' + sys.argv[1]
 
@@ -15,7 +15,7 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(6)
+port = midiout.open_port(3)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
@@ -29,7 +29,7 @@ touch = 0
 #Variaveis 
 note = ('a',0)
 last_note = 0
-notes = [62,64,65,67,69] 
+notes = [62,64,65,67,69]
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1 
 noteHold = 0.2
@@ -69,6 +69,7 @@ while(1):
         note = ('a',mapNotas["E5"])
     elif(-62 >= gyro >= -102):
         note = ('a',mapNotas["D5"])
+    
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
