@@ -55,14 +55,14 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
 
-    if(120 >= gyro >= 57):
+    if(163 >= gyro >= 93):
         note = ('a',mapNotas["F#3"])
-    elif(56 >= gyro >= 1):
+    elif(92 >= gyro >= 42):
         note = ('a',mapNotas["C#4"])
-    elif(0 >= gyro >= -55):
+    elif(41 >= gyro >= -9):
         note = ('a',mapNotas["F#4"])
-    elif(-56 >= gyro >= -119):
-        note = ('a',mapNotas["G#4"])    
+    elif(-10 >= gyro >= -60):
+        note = ('a',mapNotas["G#4"])   
 
     
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
