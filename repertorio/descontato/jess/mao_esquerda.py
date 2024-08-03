@@ -15,7 +15,7 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(1)
+port = midiout.open_port(3)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
