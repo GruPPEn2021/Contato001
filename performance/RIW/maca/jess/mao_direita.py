@@ -29,7 +29,7 @@ touch = 0
 #Variaveis 
 note = ('a',0)
 last_note = 0
-notes = [61,66,69,71]
+notes = [62,63,65,69,70]
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1 
 noteHold = 0.2
@@ -37,7 +37,6 @@ soundEffectDuration = 0.2
 previousSoundEffect = 1
 soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
-
 
 print(notes_delay)
 
@@ -61,15 +60,18 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch)) 
 
 
-    if(120 >= gyro >= 57):
-        note = ('a',mapNotas["B5"])
-    elif(56 >= gyro >= 1):
-        note = ('a',mapNotas["C#5"])
-    elif(0 >= gyro >= -56):
-        note = ('a',mapNotas["F#5"])
-    elif(-57 >= gyro >= -120):
+    if(102 >= gyro >= 62):
+        note = ('a',mapNotas["A#5"])
+    elif(61 >= gyro >= 21):
         note = ('a',mapNotas["A5"])
+    elif(20 >= gyro >= -20):
+        note = ('a',mapNotas["F5"])
+    elif(-21 >= gyro >= -61):
+        note = ('a',mapNotas["D#5"])
+    elif(-62 >= gyro >= -102):
+        note = ('a',mapNotas["D5"])
  
+
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
 
     if(touch == 1):
@@ -93,14 +95,14 @@ while(1):
                 midiout.send_message([0x80,note[1],50])
                 pass
     
-    if(20000 >= accel >= 13000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(13000 >= accel >= 9500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["C5"],100]) 
+        midiout.send_message([0x91,mapNotas["D5"],100]) 
 
-    elif(-13000 >= accel >= -20000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-9500 >= accel >= -13000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["C5"],100])
+        midiout.send_message([0x91,mapNotas["D5"],100])
     
     if(time.time() - previousSoundEffectActiv >= soundeEffectInterval):
         previousSoundEffect = time.time()
-        midiout.send_message([0x81,mapNotas["C5"],100])
+        midiout.send_message([0x81,mapNotas["D5"],100])
