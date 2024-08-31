@@ -28,7 +28,14 @@ touch = 0
 #Variáveis 
 note = ('a',0)
 last_note = 0
-notes = [36,50,53,67,70] 
+# Tente definir os intervalor dos angulos e as notas apenas na variável notes. 
+notes = [
+    (102, 62, "C3"),
+    (61, 21, "D4"),
+    (20, -20, "F4"),
+    (-21, -61, "G5"),
+    (-62, -102, "A#5")
+] 
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1  
 noteHold = 0.2
@@ -56,16 +63,9 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
 
-    if(102 >= gyro >= 62):
-        note = ('a',mapNotas["C3"])
-    elif(61 >= gyro >= 21):
-        note = ('a',mapNotas["D4"])
-    elif(20 >= gyro >= -20):
-        note = ('a',mapNotas["F4"])
-    elif(-21 >= gyro >= -61):
-        note = ('a',mapNotas["G5"])
-    elif(-62 >= gyro >= -102):
-        note = ('a',mapNotas["A#5"])
+    for min_val, max_val, current_note in notes:
+        if min_val <= gyro <= max_val:
+            note = ('a', mapNotas[current_note])
   
     
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
