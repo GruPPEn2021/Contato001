@@ -13,8 +13,8 @@ Os arquivos json deve seguir os seguinte formato:
         ]
     }
 
-port: porta midi
-notes: notas e intervalos
+### port: porta midi
+### notes: notas e intervalos
     [
         valor minino do intervalo, valor maximo do intervado, nota
     ]
