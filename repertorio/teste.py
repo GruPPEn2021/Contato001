@@ -47,6 +47,10 @@ def assignTimes(note):
         if(note == mapNotas[notes[i][2]]):
             notes_delay[i] == time.time()
 
+VERDE = '\033[32m'
+VERMELHO = '\033[31m'
+RESETAR = '\033[0m'
+
 while(1):
 
     if(serialPort.in_waiting > 0):
@@ -57,13 +61,14 @@ while(1):
         gyro = float(sensorData[1])
         accel = float(sensorData[2])
         touch = int(sensorData[3])
-        print(f"id: {int(id)}     gyro: {int(gyro)}     accel: {int(accel)}     t: {touch}", end="\r")
+        print(f"id: {int(id)}    gyro: {int(gyro)}    accel: {int(accel)}    t: {VERDE + "True" + RESETAR if touch == 1 else VERMELHO + "False" + RESETAR}", end="\r")
 
 
 
     for min_val, max_val, current_val in notes:
         if min_val >= gyro >= max_val:
             note = ('a', mapNotas[current_val])
+            print(current_val)
   
     
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)

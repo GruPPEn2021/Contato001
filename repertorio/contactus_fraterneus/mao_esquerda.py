@@ -56,7 +56,7 @@ while(1):
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
     
-    if(120 >= gyro >= 71):
+    if(180 >= gyro >= 71):
         note = ('a',mapNotas["D6"])
     elif(70 >= gyro >= 37):
         note = ('a',mapNotas["C6"])
@@ -66,7 +66,7 @@ while(1):
         note = ('a',mapNotas["G5"])
     elif(-37 >= gyro >= -70):
         note = ('a',mapNotas["F5"])
-    elif(-71 >= gyro >= -120):
+    elif(-71 >= gyro >= -180):
         note = ('a',mapNotas["E5"])
 
 
