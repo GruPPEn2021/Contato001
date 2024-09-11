@@ -19,8 +19,12 @@ midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
 port = midiout.open_port(1) #seleciona port MIDI
 
+
+#acessa o dicionario maoNotas 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile) 
+
+
 
 #Variaveis do sensor
 gyro = 0
@@ -39,8 +43,6 @@ previousSoundEffect = 1 #tempo para acionamento do accel
 soundeEffectInterval = 1 #intervalo entre os acionamentos do accel
 previousSoundEffectActiv = 0.1
  
-
-print(notes_delay)
 
 def assignTimes(note):
     

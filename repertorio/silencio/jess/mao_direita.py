@@ -36,6 +36,7 @@ previousSoundEffect = 1
 soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
 
+
 def assignTimes(note):
     
     for i in range(len(notes)):

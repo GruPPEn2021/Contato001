@@ -39,8 +39,6 @@ soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
 
 
-print(notes_delay)
-
 def assignTimes(note):
     
     for i in range(len(notes)):
@@ -52,8 +50,7 @@ while(1):
     if(serialPort.in_waiting > 0):
         serialString = serialPort.readline()
         sensorData = (serialString.decode('utf-8')).split('/')
-        
-        #print(serialString) 
+         
         id = float(sensorData[0])
         gyro = float(sensorData[1])
         accel = float(sensorData[2])
@@ -69,6 +66,7 @@ while(1):
         note = ('a',mapNotas["F5"])
     elif(-56 >= gyro >= -119):
         note = ('a',mapNotas["D#5"])
+
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
 

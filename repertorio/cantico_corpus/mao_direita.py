@@ -38,7 +38,6 @@ previousSoundEffect = 1
 soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
 
-print(notes_delay)
 
 def assignTimes(note):
     
