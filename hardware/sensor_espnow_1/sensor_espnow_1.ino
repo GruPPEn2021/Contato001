@@ -29,7 +29,7 @@ void dmpDataReady() {
 }
 
 //ESPNOW Initialization
-uint8_t broadcastAddress[] = {0xA8, 0x42, 0xE3, 0x45, 0x95, 0xE8}; //Base 1 
+uint8_t broadcastAddress[] = {0x7C, 0x9E, 0xBD, 0x39, 0xF0, 0x1C}; //Base 1 
 
 //Message Struct
 typedef struct struct_message {
