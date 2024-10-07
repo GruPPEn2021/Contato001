@@ -6,7 +6,7 @@ import sys
 import json 
 
 
-contato = 'COM1'
+contato = 'COM8'
 if len(sys.argv) > 1:
     contato = 'COM' + sys.argv[1]
 #Modificação para alternar porta bluetooh fora do script direto ao rodar pelo terminal
