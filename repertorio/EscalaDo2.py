@@ -87,18 +87,18 @@ while(1):
     for i in range(len(notes)):
         if((time.time() - notes_delay[i] > noteHold)):
             if(notes[i] != note[1]):
-                #midiout.send_message([0x80,notes[i],30])
+                midiout.send_message([0x80,notes[i],30])
                 pass
             elif(touch !=1):
-                #midiout.send_message([0x80,note[1],30])
+                midiout.send_message([0x80,note[1],30])
                 pass
 
     
-    if(17000 > accel > 9000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(16000 > accel > 10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,notes[0],50]) 
 
-    elif(-9000 > accel > -17000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-10000 > accel > -16000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,notes[0],50])
     
