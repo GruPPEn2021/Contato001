@@ -27,14 +27,14 @@ touch = 0
 #Variáveis 
 note = ('a',0)
 last_note = 0
-notes = [33,75,77,80]
+notes = [30,51,53,56,59]
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1  
 noteHold = 0.2
 soundEffectDuration = 1
 previousSoundEffect = 1
 soundeEffectInterval = 1
-previousSoundEffectActiv = 0
+previousSoundEffectActiv = 0.1
 
 
 def assignTimes(note):
@@ -58,13 +58,13 @@ while(1):
 
 
     if(102 >= gyro >= 52):
-        note = ('a',mapNotas["F#2"])
+        note = ('a',mapNotas["D#4"])
     elif(51 >= gyro >= 1):
-        note = ('a',mapNotas["D#6"])
+        note = ('a',mapNotas["F4"])
     elif(0 >= gyro >= -50):
-        note = ('a',mapNotas["F6"])
+        note = ('a',mapNotas["G#4"])
     elif(-51 >= gyro >= -101):
-        note = ('a',mapNotas["G#6"])
+        note = ('a',mapNotas["B4"])
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
@@ -90,11 +90,11 @@ while(1):
                 midiout.send_message([0x80,note[1],50])
                 pass
    
-    if(10000 >= accel >= 8500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(15000 >= accel >= 11000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["F#2"],100]) 
 
-    elif(-8500 >= accel >= -10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-11000 >= accel >= -15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["F#2"],100])
     
