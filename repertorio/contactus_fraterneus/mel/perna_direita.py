@@ -34,8 +34,8 @@ lastDebounceTime = 0.1
 noteHold = 0.1
 soundEffectDuration = 1
 previousSoundEffect = 2 
-soundeEffectInterval = 0.5
-previousSoundEffectActiv = 0
+soundeEffectInterval = 1
+previousSoundEffectActiv = 0.1
 
 
 def assignTimes(note):
