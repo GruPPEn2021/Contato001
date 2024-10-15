@@ -29,7 +29,7 @@ void dmpDataReady() {
 }
 
 //ESPNOW Initialization
-uint8_t broadcastAddress[] = {0x40, 0x22, 0xD8, 0x4F, 0x5F, 0xD8}; //Base 4
+uint8_t broadcastAddress[] = {0x78, 0xE3, 0x6D, 0xD8, 0x16, 0xD4}; //Base 8
 
 //Message Struct
 typedef struct struct_message {
@@ -133,7 +133,7 @@ void setup() {
 
 void loop() {
   
-    MIDImessage.id = 6;
+    MIDImessage.id = 8;
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO
