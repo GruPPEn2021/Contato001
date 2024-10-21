@@ -90,11 +90,11 @@ while(1):
                 midiout.send_message([0x80,note[1],50])
                 pass
    
-    if(15000 >= accel >= 11000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(16000 >= accel >= 11000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["F#2"],100]) 
 
-    elif(-11000 >= accel >= -15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-11000 >= accel >= -16000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["F#2"],100])
     

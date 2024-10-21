@@ -1,4 +1,4 @@
- //LIBRARIES
+//LIBRARIES
 #include "MPU6050_6Axis_MotionApps20.h"
 #include <esp_now.h>
 #include <WiFi.h>
@@ -29,7 +29,7 @@ void dmpDataReady() {
 }
 
 //ESPNOW Initialization
-uint8_t broadcastAddress[] = {0xA8, 0x42, 0xE3, 0x45, 0x95, 0xE8}; //Base 1 
+uint8_t broadcastAddress[] = {0x40, 0x22, 0xD8, 0x4F, 0x5F, 0xD8}; //Base 4
 
 //Message Struct
 typedef struct struct_message {
@@ -133,7 +133,7 @@ void setup() {
 
 void loop() {
   
-    MIDImessage.id = 1;
+    MIDImessage.id = 6;
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO

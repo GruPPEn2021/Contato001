@@ -1,4 +1,4 @@
- //LIBRARIES
+//LIBRARIES
 #include "MPU6050_6Axis_MotionApps20.h"
 #include <esp_now.h>
 #include <WiFi.h>
@@ -29,7 +29,8 @@ void dmpDataReady() {
 }
 
 //ESPNOW Initialization
-uint8_t broadcastAddress[] = {0x7C, 0x9E, 0xBD, 0x39, 0xF0, 0x1C}; //Base 0
+uint8_t broadcastAddress1[] = {0xB0, 0xA7, 0x32, 0xDE, 0xAF, 0x18}; //Base 3
+uint8_t broadcastAddress2[] = {0x40, 0x22, 0xD8, 0x4F, 0x5F, 0xD8}; //Base 4
 
 //Message Struct
 typedef struct struct_message {
@@ -120,9 +121,11 @@ void setup() {
   }
   esp_now_register_send_cb(OnDataSent);
   // Register peer
-  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+  memcpy(peerInfo.peer_addr, broadcastAddress1, 6);
+  memcpy(peerInfo.peer_addr, broadcastAddress2, 6);
   peerInfo.channel = 0;  
   peerInfo.encrypt = false;
+
   // Add peer        
   if (esp_now_add_peer(&peerInfo) != ESP_OK){
     Serial.println("Failed to add peer");
@@ -133,7 +136,7 @@ void setup() {
 
 void loop() {
   
-    MIDImessage.id = 0;
+    MIDImessage.id = 3;
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO
@@ -152,7 +155,8 @@ void loop() {
         MIDImessage.gyro = ypr_mod;
         MIDImessage.accel = mediaAccel;
         MIDImessage.touch = pressed;
-        esp_now_send(broadcastAddress, (uint8_t *) &MIDImessage, sizeof(MIDImessage));
+        esp_now_send(broadcastAddress1, (uint8_t *) &MIDImessage, sizeof(MIDImessage));
+        esp_now_send(broadcastAddress2, (uint8_t *) &MIDImessage, sizeof(MIDImessage));
         Serial.println("MIDI SENT");
    }
    
