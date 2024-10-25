@@ -56,15 +56,15 @@ while(1):
     
     
     if(130 >= gyro >= 72):
-        note = ('a',mapNotas["C5"])
+        note = ('a',mapNotas["F#6"])
     elif(71 >= gyro >= 25):
-        note = ('a',mapNotas["D5"])
+        note = ('a',mapNotas["E6"])
     elif(24 >= gyro >= -24):
-        note = ('a',mapNotas["E5"])
+        note = ('a',mapNotas["D#6"])
     elif(-25 >= gyro >= -71):
-        note = ('a',mapNotas["F5"])
+        note = ('a',mapNotas["D6"])
     elif(-72 >= gyro >= -130):
-        note = ('a',mapNotas["G5"])
+        note = ('a',mapNotas["G#5"])
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
@@ -91,14 +91,14 @@ while(1):
                 pass
 
     
-    if(16000 >= accel >= 9500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(16000 >= accel >= 10500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["B5"],100]) 
+        midiout.send_message([0x91,mapNotas["G#5"],100]) 
 
-    elif(-9500 >= accel >= -16000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-10500 >= accel >= -16000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["B5"],100])
+        midiout.send_message([0x91,mapNotas["G#5"],100])
     
     if(time.time() - previousSoundEffectActiv >= soundeEffectInterval):
         previousSoundEffect = time.time()
-        midiout.send_message([0x81,mapNotas["B5"],100])
+        midiout.send_message([0x81,mapNotas["G#5"],100])
