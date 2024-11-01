@@ -1,5 +1,3 @@
-
-
 import serial
 import time
 import rtmidi
@@ -59,7 +57,7 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch)) 
 
 
-    if(102 >= gyro >= 62):
+    if(180 >= gyro >= 62):
         note = ('a',mapNotas["A#5"])
     elif(61 >= gyro >= 21):
         note = ('a',mapNotas["A5"])
@@ -67,7 +65,7 @@ while(1):
         note = ('a',mapNotas["F5"])
     elif(-21 >= gyro >= -61):
         note = ('a',mapNotas["D#5"])
-    elif(-62 >= gyro >= -102):
+    elif(-62 >= gyro >= -180):
         note = ('a',mapNotas["D5"])
  
 

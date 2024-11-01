@@ -1,4 +1,3 @@
-
 import serial
 import time
 import rtmidi
@@ -72,7 +71,6 @@ while(1):
         note = ('a',mapNotas["A4"])
     elif(-137 >= gyro >= -180):
         note = ('a',mapNotas["E3"])
-
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)

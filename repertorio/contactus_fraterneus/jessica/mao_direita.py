@@ -1,5 +1,3 @@
-#Jessica
-
 import serial
 import time
 import rtmidi
@@ -55,7 +53,7 @@ while(1):
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
     
-    if(120 >= gyro >= 88):
+    if(180 >= gyro >= 88):
         note = ('a',mapNotas["A5"])
     elif(87 >= gyro >= 51):
         note = ('a',mapNotas["B5"])
@@ -67,7 +65,7 @@ while(1):
         note = ('a',mapNotas["E6"])
     elif(-51 >= gyro >= -87):
         note = ('a',mapNotas["G6"])
-    elif(-88 >= gyro >= -120):
+    elif(-88 >= gyro >= -180):
         note = ('a',mapNotas["A6"])
 
 

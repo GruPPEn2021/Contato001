@@ -55,11 +55,11 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch)) 
     
     
-    if(100 >= gyro >= 31):
+    if(180 >= gyro >= 31):
         note = ('a',mapNotas["C5"])
     elif(30 >= gyro >= -30):
         note = ('a',mapNotas["D5"])
-    elif(31 >= gyro >= 100):
+    elif(31 >= gyro >= 180):
         note = ('a',mapNotas["E5"])
 
 

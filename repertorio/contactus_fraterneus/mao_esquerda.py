@@ -1,5 +1,3 @@
-#Jessica
-
 import serial
 import time
 import rtmidi

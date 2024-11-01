@@ -1,4 +1,3 @@
-
 import serial
 import time
 import rtmidi
@@ -56,6 +55,7 @@ while(1):
         accel = float(sensorData[2])
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
+    
     #17-06 TROQUEi TUDO COM O CLEY ASSNADO ARTHUR
     if(180 >= gyro >= 137):
         note = ('a',mapNotas["A5"])

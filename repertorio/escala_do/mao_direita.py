@@ -1,10 +1,8 @@
-#Notas mais agudas estão no alto caso equipamento esteja na mão direita.
-
 import serial
 import time
 import rtmidi
 import sys
-
+import json
 
 contato = 'COM4'
 if len(sys.argv) > 1:
@@ -16,6 +14,9 @@ serialString = ''
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
 port = midiout.open_port(2)
+
+with open('mapNotas.json') as jsonfile:
+      mapNotas = json.load(jsonfile)
 
 #Variaveis do sensor
 gyro = 0
@@ -54,20 +55,20 @@ while(1):
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
     
-    if(-103 <= gyro <= -73):
-        note = ('B5',notes[6])
-    elif(-72 <= gyro <= -42):
-        note = ('A5',notes[5])
-    elif(-41 <= gyro <= -11):
-        note = ('G5',notes[4])
-    elif(-10 <= gyro <= 20):
-        note = ('F5',notes[3])
-    elif(21 <= gyro <= 41):
-        note = ('E5',notes[2])
-    elif(42 <= gyro <= 72):
-        note = ('D5',notes[1])
-    elif(73 <= gyro <= 103):
-        note = ('C5',notes[0])
+    if(180 >= gyro >= 88):
+        note = ('a',mapNotas["C5"])
+    elif(87 >= gyro >= 51):
+        note = ('a',mapNotas["D5"])
+    elif(50 >= gyro >= 14):
+        note = ('a',mapNotas["E5"])
+    elif(13 >= gyro >= -13):
+        note = ('a',mapNotas["F5"])
+    elif(-14 >= gyro >= -50):
+        note = ('a',mapNotas["G5"])
+    elif(-51 >= gyro >= -87):
+        note = ('a',mapNotas["A5"])
+    elif(-88 >= gyro >= -180):
+        note = ('a',mapNotas["B5"])
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)

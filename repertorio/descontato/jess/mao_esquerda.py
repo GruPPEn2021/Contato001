@@ -1,5 +1,3 @@
-
-
 import serial
 import time
 import rtmidi
@@ -15,7 +13,7 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(1)
+port = midiout.open_port(5)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
@@ -36,7 +34,7 @@ noteHold = 0.2
 soundEffectDuration = 0.2
 previousSoundEffect = 1
 soundeEffectInterval = 1
-previousSoundEffectActiv = 0.5
+previousSoundEffectActiv = 0.1
 
 
 def assignTimes(note):
@@ -59,11 +57,11 @@ while(1):
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch))
 
 
-    if(120 >= gyro >= 40):
+    if(180 >= gyro >= 40):
         note = ('a',mapNotas["D4"])
     elif(39 >= gyro >= -39):
         note = ('a',mapNotas["F4"])
-    elif(-40 >= gyro >= -120):
+    elif(-40 >= gyro >= -180):
         note = ('a',mapNotas["F#4"])
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)  
@@ -90,11 +88,11 @@ while(1):
                 pass
 
     
-    if(15000 >= accel >= 12000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(15000 >= accel >= 10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["D4"],100]) 
 
-    elif(-12000 >= accel >= -15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-10000 >= accel >= -15000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["D4"],100])
     
