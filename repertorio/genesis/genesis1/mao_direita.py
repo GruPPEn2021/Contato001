@@ -14,7 +14,7 @@ serialString = ''
 
 midiout = rtmidi.MidiOut()
 print(midiout.get_ports())
-port = midiout.open_port(2)
+port = midiout.open_port(4)
 
 with open('mapNotas.json') as jsonfile:
       mapNotas = json.load(jsonfile)
@@ -29,11 +29,11 @@ note = ('a',0)
 last_note = 0
 notes = [42,49,54,56]
 notes_delay = [0] * len(notes)
-lastDebounceTime = 0.1  
+lastDebounceTime = 0.1 
 noteHold = 0.2
-soundEffectDuration = 2
-previousSoundEffect = 3
-soundeEffectInterval = 2
+soundEffectDuration = 0.2
+previousSoundEffect = 1
+soundeEffectInterval = 1
 previousSoundEffectActiv = 0.1
 
 
@@ -89,11 +89,11 @@ while(1):
                 midiout.send_message([0x80,note[1],50])
                 pass
     
-    if(20000 >= accel >= 14000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(20000 >= accel >= 11000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["G#5"],100]) 
 
-    elif(-14000 >= accel >= -20000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-11000 >= accel >= -20000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["G#5"],100])
     

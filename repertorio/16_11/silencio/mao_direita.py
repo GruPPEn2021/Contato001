@@ -1,10 +1,11 @@
+
 import serial
 import time
 import rtmidi
 import sys
 import json
 
-contato = 'COM1'
+contato = 'COM4'
 if len(sys.argv) > 1:
     contato = 'COM' + sys.argv[1]
 
@@ -26,14 +27,14 @@ touch = 0
 #Variaveis 
 note = ('a',0)
 last_note = 0
-notes = [57,59]
+notes = [83,85,86,88]
 notes_delay = [0] * len(notes)
 lastDebounceTime = 0.1 
-noteHold = 0.2
-soundEffectDuration = 0.2
-previousSoundEffect = 1
+noteHold = 0.1
+soundEffectDuration = 1
+previousSoundEffect = 1 
 soundeEffectInterval = 1
-previousSoundEffectActiv = 1
+previousSoundEffectActiv = 0.1
 
 
 def assignTimes(note):
@@ -53,12 +54,16 @@ while(1):
         accel = float(sensorData[2])
         touch = float(sensorData[3])
         print(int(id), 'gyro:', gyro, 'acc:', accel, 't:', int(touch)) 
-    
-    
-    if(180 >= gyro >= 0):
-        note = ('a',mapNotas["B4"])
-    elif(-170 >= gyro >= -180):
-        note = ('a',mapNotas["A4"])
+
+
+    if(180 >= gyro >= 52):
+        note = ('a',mapNotas["E7"])
+    elif(51 >= gyro >= 1):
+        note = ('a',mapNotas["D7"])
+    elif(0 >= gyro >= -50):
+        note = ('a',mapNotas["C#7"])
+    elif(-51 >= gyro >= -180):
+        note = ('a',mapNotas["B6"])
 
 
     can = (note == last_note) and (time.time() - lastDebounceTime > 0.1)
@@ -85,14 +90,14 @@ while(1):
                 pass
 
     
-    if(16000 >= accel >= 9500 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(10000 >= accel >= 5000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["B4"],100]) 
+        midiout.send_message([0x91,mapNotas["E7"],100]) 
 
-    elif(-9500 >= accel >= -16000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    elif(-5000 >= accel >= -10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
-        midiout.send_message([0x91,mapNotas["B4"],100])
+        midiout.send_message([0x91,mapNotas["E7"],100])
     
     if(time.time() - previousSoundEffectActiv >= soundeEffectInterval):
         previousSoundEffect = time.time()
-        midiout.send_message([0x81,mapNotas["B4"],100])
+        midiout.send_message([0x81,mapNotas["E7"],100])

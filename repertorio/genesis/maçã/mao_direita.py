@@ -60,7 +60,7 @@ while(1):
     elif(136 >= gyro >= 91):
         note = ('a',mapNotas["E4"])
     elif(90 >= gyro >= 45):
-        note = ('a',mapNotas["E3"])
+        note = ('a',mapNotas["E3"]) 
     elif(44 >= gyro >= 0):
         note = ('a',mapNotas["C4"])
     elif(-1 >= gyro >= -45):
