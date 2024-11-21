@@ -31,7 +31,7 @@ void dmpDataReady() {
 }
 
 //ESPNOW Initialization
-uint8_t broadcastAddress[] = {0x8C, 0x4B, 0x14, 0x9A, 0x69, 0x70}; // MUDAR O MIDImessage.id sempre que mudar o endereço de base
+uint8_t broadcastAddress[] = {0x40, 0x22, 0xD8, 0x4F, 0x5F, 0xD8}; // MUDAR O MIDImessage.id sempre que mudar o endereço de base
 // Base 3 ---- 0xB0, 0xA7, 0x32, 0xDE, 0xAF, 0x18
 // Base 4 ---- 0x40, 0x22, 0xD8, 0x4F, 0x5F, 0xD8
 // Base 5 ---- 0xA8, 0x42, 0xE3, 0x45, 0x95, 0xE8
@@ -144,7 +144,7 @@ void setup() {
 
 void loop() {
   
-    MIDImessage.id = 7  ; 
+    MIDImessage.id = 4; 
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO
