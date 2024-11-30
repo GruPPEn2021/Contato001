@@ -91,7 +91,7 @@ while(1):
                 midiout.send_message([0x80,note[1],50])
                 pass
     
-    if(20000 >= accel >= 13000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
+    if(20000 >= accel >= 10000 and (time.time() - previousSoundEffectActiv >= soundeEffectInterval)):
         previousSoundEffectActiv = time.time()
         midiout.send_message([0x91,mapNotas["D5"],100]) 
 
